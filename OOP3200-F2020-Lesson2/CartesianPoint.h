@@ -17,6 +17,10 @@ public:
 	CartesianPoint(int x = 1, int y = 1);
 	~CartesianPoint();
 
+	double operator-(const CartesianPoint& pointTo) const;
+
+	
+
 	// --------------------------------------------------------------------------------
 	/* Accessors: Used to query the state of the object */
 
