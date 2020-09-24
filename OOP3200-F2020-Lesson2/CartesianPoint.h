@@ -15,6 +15,7 @@ public:
 	*	- should set values for each member variable
 	*/
 	CartesianPoint(int x = 1, int y = 1);
+	~CartesianPoint();
 
 	// --------------------------------------------------------------------------------
 	/* Accessors: Used to query the state of the object */
@@ -33,6 +34,10 @@ public:
 
 	// set y,
 	void SetY(int y);
+
+	int GetX() const;
+
+	int GetY() const;
 
 	// set point (both x and y)
 	void SetPoint(int x, int y);
