@@ -6,13 +6,26 @@
 // Class definition section
 
 // constructor for CartesianPoint
-CartesianPoint::CartesianPoint(int x, int y)
+CartesianPoint::CartesianPoint(const int x, const int y) : myX(x), myY(y)
 {
-	SetPoint(x, y);
+	//SetPoint(x, y);
 }
 
 CartesianPoint::~CartesianPoint()
 = default;
+
+CartesianPoint::CartesianPoint(const CartesianPoint& point2)
+{
+	SetPoint(point2.GetX() , point2.GetY());
+}
+
+CartesianPoint CartesianPoint::operator+(const CartesianPoint & point2) const
+{
+	CartesianPoint tempPoint;
+	tempPoint.SetX(GetX() + point2.GetX());
+	tempPoint.SetY(GetY() + point2.GetY());
+	return tempPoint;
+}
 
 double CartesianPoint::operator-(const CartesianPoint& pointTo) const
 {
@@ -24,6 +37,12 @@ double CartesianPoint::operator-(const CartesianPoint& pointTo) const
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
+}
+
+bool CartesianPoint::operator==(const CartesianPoint& rhs) const
+{
+	return ((GetX() == rhs.GetX()) && (GetY() == rhs.GetY()));
+
 }
 
 int CartesianPoint::GetX()

@@ -17,9 +17,14 @@ public:
 	CartesianPoint(int x = 1, int y = 1);
 	~CartesianPoint();
 
+	/* copy constructor */
+	CartesianPoint(const CartesianPoint& point2);
+
+	CartesianPoint operator+(const CartesianPoint& point2) const;
+
 	double operator-(const CartesianPoint& pointTo) const;
 
-	
+	bool operator==(const CartesianPoint& rhs) const;
 
 	// --------------------------------------------------------------------------------
 	/* Accessors: Used to query the state of the object */
