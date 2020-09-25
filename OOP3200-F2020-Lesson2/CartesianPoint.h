@@ -27,6 +27,8 @@ public:
 
 	bool operator==(const CartesianPoint& rhs) const;
 
+	CartesianPoint operator=(const CartesianPoint& new_point);
+
 	/* friend overloads */
 	friend std::ostream& operator<<(std::ostream& out, const CartesianPoint& point);
 	friend std::istream& operator>>(std::istream& in, CartesianPoint& point);
@@ -57,8 +59,6 @@ public:
 
 
 	// get the distance between this point and a second point
-	//double GetDistanceTo(CartesianPoint pointTo) const;
-
 	double GetDistanceTo(const CartesianPoint& point_to) const;
 
 	// convert the obj to a string

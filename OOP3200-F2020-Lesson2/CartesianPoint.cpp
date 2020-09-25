@@ -45,14 +45,13 @@ bool CartesianPoint::operator==(const CartesianPoint& rhs) const
 	return ((GetX() == rhs.GetX()) && (GetY() == rhs.GetY()));
 }
 
-
-/*CartesianPoint CartesianPoint::operator=(const CartesianPoint& new_point)
+CartesianPoint CartesianPoint::operator=(const CartesianPoint& newPoint)
 {
-	SetX(new_point.GetX());
-	SetY(new_point.GetY());
+	SetX(newPoint.GetX());
+	SetY(newPoint.GetY());
 
 	return *this;
-}*/
+}
 
 std::ostream& operator<<(std::ostream& out, const CartesianPoint& point)
 {
