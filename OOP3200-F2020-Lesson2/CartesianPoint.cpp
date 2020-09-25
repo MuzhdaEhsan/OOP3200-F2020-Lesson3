@@ -6,7 +6,7 @@
 // Class definition section
 
 // constructor for CartesianPoint
-CartesianPoint::CartesianPoint(const int x, const int y) : myX(x), myY(y)
+CartesianPoint::CartesianPoint(const int x, const int y) : m_X(x), m_Y(y)
 {
 	//SetPoint(x, y);
 }
@@ -19,21 +19,22 @@ CartesianPoint::CartesianPoint(const CartesianPoint& point2)
 	SetPoint(point2.GetX() , point2.GetY());
 }
 
-CartesianPoint CartesianPoint::operator+(const CartesianPoint & point2) const
+CartesianPoint CartesianPoint::operator+(const CartesianPoint& point2) const
 {
 	CartesianPoint tempPoint;
-	tempPoint.SetX(GetX() + point2.GetX());
-	tempPoint.SetY(GetY() + point2.GetY());
+	tempPoint.SetX((*this).GetX() + point2.GetX());
+	tempPoint.SetY((*this).GetY() + point2.GetY());
+
 	return tempPoint;
 }
 
 double CartesianPoint::operator-(const CartesianPoint& pointTo) const
 {
 	// difference between x values
-	const int xDelta = pointTo.myX - myX;
+	const int xDelta = pointTo.GetX() - m_X;
 
 	// difference between y values
-	const int yDelta = pointTo.myY - myY;
+	const int yDelta = pointTo.GetY() - m_Y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -42,17 +43,41 @@ double CartesianPoint::operator-(const CartesianPoint& pointTo) const
 bool CartesianPoint::operator==(const CartesianPoint& rhs) const
 {
 	return ((GetX() == rhs.GetX()) && (GetY() == rhs.GetY()));
+}
 
+
+/*CartesianPoint CartesianPoint::operator=(const CartesianPoint& new_point)
+{
+	SetX(new_point.GetX());
+	SetY(new_point.GetY());
+
+	return *this;
+}*/
+
+std::ostream& operator<<(std::ostream& out, const CartesianPoint& point)
+{
+	out << point.ToString();
+	return out;
+}
+
+
+std::istream& operator>>(std::istream& in, CartesianPoint& point)
+{
+	in >> point.m_X;
+	in.ignore();
+	in >> point.m_Y;
+
+	return in;
 }
 
 int CartesianPoint::GetX()
 {
-	return 0;
+	return m_X;
 }
 
 int CartesianPoint::GetY()
 {
-	return 0;
+	return m_Y;
 }
 
 void CartesianPoint::SetPoint(int x, int y)
@@ -63,22 +88,22 @@ void CartesianPoint::SetPoint(int x, int y)
 
 void CartesianPoint::SetX(int x)
 {
-	myX = x;
+	m_X = x;
 }
 
 void CartesianPoint::SetY(int y)
 {
-	myY = y;
+	m_Y = y;
 }
 
 int CartesianPoint::GetX() const
 {
-	return myX;
+	return m_X;
 }
 
 int CartesianPoint::GetY() const
 {
-	return myY;
+	return m_Y;
 }
 
 
@@ -87,13 +112,13 @@ int CartesianPoint::GetY() const
 *	@param	pointTo: CartesianPoint
 *	@return	the distance as a double
 */
-double CartesianPoint::GetDistanceTo(CartesianPoint pointTo) const
+double CartesianPoint::GetDistanceTo(const CartesianPoint& point_to) const
 {
 	// difference between x values
-	const int xDelta = pointTo.myX - myX;
+	const int xDelta = point_to.GetX() - m_X;
 
 	// difference between y values
-	const int yDelta = pointTo.myY - myY;
+	const int yDelta = point_to.GetY() - m_Y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -110,8 +135,10 @@ std::string CartesianPoint::ToString() const
 	std::stringstream strOut;
 
 	// build the string
-	strOut << "(" << myX << ", " << myY << ")";
+	strOut << "(" << m_X << ", " << m_Y << ")";
 
 	// return the string
 	return strOut.str();
 }
+
+
